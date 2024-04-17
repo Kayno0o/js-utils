@@ -1,35 +1,32 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    // Enable latest features
-    "lib": ["ESNext"],
-    "moduleDetection": "force",
-    "module": "ESNext",
+    "module": "CommonJS",
 
-    // Bundler mode
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "allowJs": true,
-    // "allowImportingTsExtensions": true,
-    // "verbatimModuleSyntax": true,
-    // "noEmit": true,
 
-    // Best practices
     "strict": true,
     "noFallthroughCasesInSwitch": true,
 
-    "noPropertyAccessFromIndexSignature": false,
-    // Some stricter flags (disabled by default)
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
 
     "declaration": true,
     "outDir": "dist",
-    // "emitDeclarationOnly": true,
-    // "declarationMap": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts"]
+  "files": ["./index.ts"],
+  "include": ["index.ts", "src"],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

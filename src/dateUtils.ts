@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import fr from 'dayjs/locale/fr'
 
-export type DateFormatType = 'input' | 'shortText' | 'longText' | 'default' | 'full-input'
+export type DateFormatType = 'input' | 'shortText' | 'longText' | 'full-input' | 'default'
 
 type SingleDateProp = Date | string
 type NullableSingleDateProp = SingleDateProp | null | undefined
