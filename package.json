@@ -32,8 +32,12 @@
     "@types/bun": "latest",
     "eslint": "^9.0.0",
     "eslint-plugin-format": "^0.1.0",
+    "lint-staged": "^15.2.2",
     "tsup": "^8.0.2",
     "typedoc": "^0.25.13",
     "typescript": "^5.4.5"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
