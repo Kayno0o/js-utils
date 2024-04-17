@@ -1,7 +1,7 @@
 {
   "name": "@kaynooo/js-utils",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Some utils functions that I often use in my TS based projects",
   "author": "Kaynooo <https://github.com/kayno0o>",
   "license": "MIT",
@@ -10,8 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/kayno0o/js-utils.git"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "unpkg": "./dist/index.global.js",
   "types": "./dist/index.d.ts",
   "files": [
