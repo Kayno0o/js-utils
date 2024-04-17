@@ -24,7 +24,7 @@ export default antfu({
     'no-empty-function': 'off',
     'ts/no-empty-function': 'error',
     'ts/no-empty-interface': 'error',
-    'ts/no-inferrable-types': 'error',
+    'ts/no-inferrable-types': 'off',
     'ts/prefer-for-of': 'error',
     'ts/prefer-function-type': 'error',
     'ts/prefer-namespace-keyword': 'error',

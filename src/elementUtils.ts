@@ -1,3 +1,9 @@
+/**
+ * Represents the dimensions and positions of an HTML element including its padding, margin, border, and scroll dimensions.
+ * @param {Element | null | undefined} element The HTML element to calculate dimensions for.
+ * @returns An object containing various dimensions and positions related to the element.
+ * @category DOM
+ */
 export function getElementBoundingBox(element?: Element | null) {
   const boundingRect = element?.getBoundingClientRect()
 
