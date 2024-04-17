@@ -16,3 +16,6 @@ yarn install @kay/ts-utils
 # npm
 npm install @kay/ts-utils
 ```
+
+## Documentation with [typedoc](https://typedoc.org/):
+https://kayno0o.github.io/ts-utils/docs/
