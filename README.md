@@ -1,4 +1,4 @@
-# [@kayno0o/ts-utils](https://github.com/kayno0o/ts-utils)
+# [@kayno0o/js-utils](https://github.com/kayno0o/js-utils)
 
 ## Installation
 
@@ -18,4 +18,4 @@ npm install @kaynooo/js-utils
 ```
 
 ## Documentation with [typedoc](https://typedoc.org/):
-https://kayno0o.github.io/ts-utils/docs/
+https://kayno0o.github.io/js-utils/docs/
