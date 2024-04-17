@@ -4,17 +4,17 @@
 
 ```bash
 # @antfu/ni
-ni @kay/ts-utils
+ni @kaynooo/js-utils
 
 # bun
-bun add @kay/ts-utils
+bun add @kaynooo/js-utils
 # pnpm
-pnpm add @kay/ts-utils
+pnpm add @kaynooo/js-utils
 
 # yarn
-yarn install @kay/ts-utils
+yarn install @kaynooo/js-utils
 # npm
-npm install @kay/ts-utils
+npm install @kaynooo/js-utils
 ```
 
 ## Documentation with [typedoc](https://typedoc.org/):
