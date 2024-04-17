@@ -3,6 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Some utils functions that I often use in my TS based projects",
+  "author": "Kaynooo <https://github.com/kayno0o>",
   "license": "MIT",
   "homepage": "https://kayno0o.github.io/ts-utils/docs/",
   "repository": {
