@@ -8,7 +8,7 @@
   "homepage": "https://kayno0o.github.io/ts-utils/docs/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kayno0o/ts-utils"
+    "url": "git+https://github.com/kayno0o/ts-utils.git"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
