@@ -5,6 +5,8 @@ import fr from 'dayjs/locale/fr'
 dayjs.extend(utc)
 dayjs.locale(fr)
 
+export { dayjs }
+
 /**
  * Represents different date format types.
  * @category date
