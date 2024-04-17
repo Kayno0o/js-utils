@@ -1,17 +1,17 @@
 {
-  "name": "@kay/ts-utils",
+  "name": "@kayno0o/ts-utils",
   "type": "module",
   "version": "1.0.0",
   "description": "Some utils functions that I often use in my TS based projects",
   "license": "MIT",
-  "homepage": "https://github.com/kayno0o/ts-utils#readme",
+  "homepage": "https://kayno0o.github.io/ts-utils/docs/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kayno0o/ts-utils.git"
+    "url": "https://github.com/kayno0o/ts-utils"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
-  "unpkg": "dist/index.global.js",
+  "unpkg": "./dist/index.global.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
