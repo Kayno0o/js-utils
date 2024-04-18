@@ -1,17 +1,25 @@
 /**
  * generates a random string of the specified length using cryptographic random values.
  * @param {number} length the length of the random string to generate.
- * @param {boolean} [hex] if true, generates a random hexadecimal string; otherwise, generates a random byte string.
+ * @param {string} [charset] if given, generates a random string using the given charset.
  * @returns {string} the random string generated.
  * @category text
  */
-export function randomString(length: number, hex?: boolean) {
+export function randomString(length: number, charset?: string): string {
+  if (!charset)
+    charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+  const charsetLength = charset.length
+  let result = ''
   const array = new Uint8Array(length)
   crypto.getRandomValues(array)
 
-  if (hex)
-    return Array.from(array, byte => (`0${(byte & 0xFF).toString(16)}`).slice(-2)).join('')
-  return Array.from(array, byte => byte).join('')
+  for (let i = 0; i < length; i++) {
+    const randomIndex = array[i] % charsetLength
+    result += charset.charAt(randomIndex)
+  }
+
+  return result
 }
 
 /**
@@ -20,7 +28,7 @@ export function randomString(length: number, hex?: boolean) {
  * @returns {string} the normalized string.
  * @category text
  */
-export function normalizeAccents(str: string) {
+export function normalizeAccents(str: string): string {
   return str.normalize('NFD').replace(/[\u0300-\u036F]/g, '')
 }
 

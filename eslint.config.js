@@ -2,10 +2,6 @@ import antfu from '@antfu/eslint-config'
 
 export default antfu({
   typescript: true,
-  vue: true,
-  formatters: {
-    css: true,
-  },
   rules: {
     'no-console': 'off',
 
@@ -29,4 +25,8 @@ export default antfu({
     'ts/prefer-function-type': 'error',
     'ts/prefer-namespace-keyword': 'error',
   },
-})
+}, [
+  {
+    ignores: ['**/docs/**'],
+  },
+])
