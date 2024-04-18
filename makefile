@@ -35,3 +35,4 @@ ff-pages:
 	git checkout gh-pages
 	git merge --ff-only origin/main
 	git push
+	git checkout main
