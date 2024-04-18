@@ -31,8 +31,8 @@ full-minor: deploy commit minor publish
 full-major: deploy commit major publish
 
 ff-pages:
-	git fetch origin
 	git checkout gh-pages
+	git fetch origin
 	git merge --ff-only origin/main
 	git push
 	git checkout main
