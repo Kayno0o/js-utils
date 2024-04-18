@@ -29,3 +29,9 @@ commit:
 full-patch: deploy commit patch publish
 full-minor: deploy commit minor publish
 full-major: deploy commit major publish
+
+ff-pages:
+	git fetch origin
+	git checkout gh-pages
+	git merge --ff-only origin/main
+	git push
