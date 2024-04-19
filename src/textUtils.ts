@@ -1,10 +1,4 @@
-/**
- * generates a random string of the specified length using cryptographic random values.
- * @param {number} length the length of the random string to generate.
- * @param {string} [charset] if given, generates a random string using the given charset.
- * @returns {string} the random string generated.
- * @category text
- */
+/** @category text */
 export function randomString(length: number, charset?: string): string {
   if (!charset)
     charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -23,9 +17,7 @@ export function randomString(length: number, charset?: string): string {
 }
 
 /**
- * normalizes a string by removing accents and diacritics.
- * @param {string} str the input string to normalize.
- * @returns {string} the normalized string.
+ * remove accents and diacritics
  * @category text
  */
 export function normalizeAccents(str: string): string {
@@ -33,14 +25,13 @@ export function normalizeAccents(str: string): string {
 }
 
 /**
- * converts a string into a slug suitable for urls.
- * @param {string} str the input string to slugify.
- * @param {object} [options] optional configuration options.
- * @param {string} [options.replace] the string to replace non-alphanumeric characters with (default is '-').
- * @param {boolean} [options.lower] whether to convert the string to lowercase (default is true).
- * @param {boolean} [options.trim] whether to trim leading and trailing whitespace (default is true).
- * @param {boolean} [options.deduplicate] whether to deduplicate successives `replace` char (default is true)
- * @returns {string} the slugified string.
+ * converts a string into a slug
+ * @param {string} str
+ * @param {object} [options]
+ * @param {string} [options.replace] the string to replace non-alphanumeric characters with (default='-').
+ * @param {boolean} [options.lower] convert the string to lowercase (default=true).
+ * @param {boolean} [options.trim] trim leading/trailing whitespace (default=true).
+ * @param {boolean} [options.deduplicate] deduplicate successives `replace` char (default=true)
  * @category text
  */
 export function slugify(str: string, options?: {

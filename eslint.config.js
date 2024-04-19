@@ -1,14 +1,12 @@
 import antfu from '@antfu/eslint-config'
 
 export default antfu({
-  typescript: true,
   rules: {
-    'no-console': 'off',
-
     'array-bracket-newline': ['error', 'consistent'],
     'array-element-newline': ['error', 'consistent'],
-
-    // stylistic
+    'no-console': 'off',
+    'no-empty-function': 'off',
+    'sort-keys': 'warn',
     'ts/adjacent-overload-signatures': 'error',
     'ts/array-type': 'error',
     'ts/ban-tslint-comment': 'error',
@@ -17,7 +15,6 @@ export default antfu({
     'ts/consistent-indexed-object-style': 'error',
     'ts/consistent-type-definitions': 'error',
     'ts/no-confusing-non-null-assertion': 'error',
-    'no-empty-function': 'off',
     'ts/no-empty-function': 'error',
     'ts/no-empty-interface': 'error',
     'ts/no-inferrable-types': 'off',
@@ -25,6 +22,7 @@ export default antfu({
     'ts/prefer-function-type': 'error',
     'ts/prefer-namespace-keyword': 'error',
   },
+  typescript: true,
 }, [
   {
     ignores: ['**/docs/**'],

@@ -1,13 +1,4 @@
-/**
- * Converts an image to WebP format.
- * @param {string} imageUrl The URL of the image to convert.
- * @param {object} [options] Options for the conversion.
- * @param {number} [options.maxWidth] The maximum width of the converted image.
- * @param {number} [options.maxHeight] The maximum height of the converted image.
- * @param {number} [options.quality] The quality of the converted image (0 to 1).
- * @param {'image/webp' | 'image/png' | 'image/jpeg'} [options.format] The format of the converted image.
- * @returns {Promise<string>} A promise that resolves with the data URL of the converted image.
- */
+/** @category canvas */
 export async function convertImage(imageUrl: string, options?: {
   maxWidth?: number
   maxHeight?: number
