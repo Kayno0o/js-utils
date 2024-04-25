@@ -26,13 +26,13 @@ commit:
 	@read -p "Enter commit message: " message; \
 	git commit -m "$$message"
 
-full-patch: deploy commit patch publish
-full-minor: deploy commit minor publish
-full-major: deploy commit major publish
-
 ff-pages:
 	git checkout gh-pages
 	git fetch origin
 	git merge --ff-only origin/main
 	git push
 	git checkout main
+
+full-patch: deploy commit patch publish ff-pages
+full-minor: deploy commit minor publish ff-pages
+full-major: deploy commit major publish ff-pages
