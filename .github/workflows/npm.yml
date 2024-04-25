@@ -1,0 +1,51 @@
+name: Generate Documentation and Update gh-pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_bump_type:
+        type: choice
+        required: true
+        description: The type of version bump
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  doc:
+    name: doc
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set git config
+        run: |
+          git config --local user.email "kayno0o+js-utils@@github.com"
+          git config --local user.name "Documentation Generator"
+  
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run eslint
+        run: bun run lint
+
+      - name: Build package files
+        run: bun run build
+      
+      - name: Upgrade package version
+        run: npm version ${{ github.event.inputs.version_bump_type }}
+
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      - name: Push changes
+        run: git push --follow-tags
