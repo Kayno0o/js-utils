@@ -23,9 +23,9 @@ jobs:
 
       - name: Commit documentation changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
+          git config --local user.email "kevyn.fyleyssant+js-utils@gmail.com"
+          git config --local user.name "Kayno0o"
+          git add -A
           git diff-index --quiet HEAD || git commit -m "Generate documentation"
 
       - name: Push changes to main
