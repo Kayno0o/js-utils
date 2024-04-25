@@ -24,6 +24,11 @@ jobs:
       - name: Install dependencies
         run: bun install
 
+      - name: Set git config
+        run: |
+          git config --local user.email "kevyn.fyleyssant+js-utils@gmail.com"
+          git config --local user.name "Github Workflow"
+
       - name: Checkout gh-pages and fast-forward
         run: |
           git fetch origin main
@@ -35,8 +40,6 @@ jobs:
 
       - name: Commit documentation changes
         run: |
-          git config --local user.email "kevyn.fyleyssant+js-utils@gmail.com"
-          git config --local user.name "Github Workflow"
           git add -A
           git diff-index --quiet HEAD || git commit -m "Generate documentation"
 
