@@ -39,7 +39,6 @@ jobs:
       - name: Upgrade package version
         run: npm version ${{ github.event.inputs.version_bump_type }}
 
-      - run: npm ci
       - name: Publish to npm
         run: npm publish
         env:
