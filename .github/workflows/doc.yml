@@ -24,7 +24,7 @@ jobs:
       - name: Commit documentation changes
         run: |
           git config --local user.email "kevyn.fyleyssant+js-utils@gmail.com"
-          git config --local user.name "Kayno0o"
+          git config --local user.name "Github Workflow"
           git add -A
           git diff-index --quiet HEAD || git commit -m "Generate documentation"
 
@@ -36,8 +36,7 @@ jobs:
 
       - name: Checkout gh-pages and fast-forward
         run: |
+          git fetch origin gh-pages
           git checkout gh-pages
-          git fetch origin
-          git merge --ff-only origin/main
+          git rebase main
           git push origin gh-pages
-          git checkout main
