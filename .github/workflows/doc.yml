@@ -18,16 +18,17 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: gh-pages
+
+      - name: Set git config
+        run: |
+          git config --local user.email "kayno0o+js-utils@github.com"
+          git config --local user.name "Documentation Generator"
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
 
       - name: Install dependencies
         run: bun install
-
-      - name: Set git config
-        run: |
-          git config --local user.email "kevyn.fyleyssant+js-utils@gmail.com"
-          git config --local user.name "Github Workflow"
 
       - name: Fetch origin/main
         run: git fetch origin main
