@@ -22,7 +22,7 @@ jobs:
 
       - name: Checkout gh-pages and fast-forward
         run: |
-          git merge main
+          git merge --ff-only origin/main
           git push origin gh-pages
 
       - name: Generate documentation
@@ -35,8 +35,8 @@ jobs:
           git add -A
           git diff-index --quiet HEAD || git commit -m "Generate documentation"
 
-      - name: Push changes to main
+      - name: Push changes to gh-pages
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          branch: gh-pages
