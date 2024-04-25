@@ -4,9 +4,6 @@ build:
 lint:
 	bun run lint:fix
 
-doc:
-	bun run doc
-
 patch: # v0.0.X
 	npm version patch
 
@@ -19,7 +16,7 @@ major: # vX.0.0
 publish:
 	npm publish
 
-deploy: build lint doc
+deploy: build lint
 
 commit:
 	git add -A
@@ -29,13 +26,6 @@ commit:
 push:
 	git push
 
-ff-pages:
-	git checkout gh-pages
-	git fetch origin
-	git merge --ff-only origin/main
-	git push
-	git checkout main
-
-full-patch: deploy commit patch publish push ff-pages
-full-minor: deploy commit minor publish push ff-pages
-full-major: deploy commit major publish push ff-pages
+full-patch: deploy commit patch publish push
+full-minor: deploy commit minor publish push
+full-major: deploy commit major publish push
