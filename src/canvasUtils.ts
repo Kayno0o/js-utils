@@ -1,4 +1,3 @@
-/** @category canvas */
 export async function convertImage(imageUrl: string, options?: {
   maxWidth?: number
   maxHeight?: number

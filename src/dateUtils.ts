@@ -37,7 +37,6 @@ export function formatDate(date: DateProp, format?: string, config?: DateUtilsCo
  * @param {boolean} [config.unique] returns unique formatted dates in case of an array (default: false).
  * @param {string} [config.separator] the separator to use when joining multiple dates (default: ', ').
  * @returns {string} formatted date(s) as a string.
- * @category date
  */
 export function formatDate(date: DateProp, format: DateFormatType | string = 'default', config: DateUtilsConfig = {}): string {
   if (Array.isArray(date)) {
@@ -59,7 +58,6 @@ export function formatDate(date: DateProp, format: DateFormatType | string = 'de
  * @param {NullableSingleDateProp} end
  * @param {boolean} [utc] formats in utc timezone (default: false).
  * @returns {boolean} true if is between the start and end (inclusive), else false.
- * @category date
  */
 export function isDateBetween(date: SingleDateProp, start: NullableSingleDateProp, end: NullableSingleDateProp, utc: boolean = false): boolean {
   const d = utc ? dayjs.utc(date) : dayjs(date)

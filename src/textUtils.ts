@@ -1,4 +1,3 @@
-/** @category text */
 export function randomString(length: number, charset?: string): string {
   if (!charset)
     charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -16,10 +15,7 @@ export function randomString(length: number, charset?: string): string {
   return result
 }
 
-/**
- * remove accents and diacritics
- * @category text
- */
+/** remove accents and diacritics */
 export function normalizeAccents(str: string): string {
   return str.normalize('NFD').replace(/[\u0300-\u036F]/g, '')
 }
@@ -32,7 +28,6 @@ export function normalizeAccents(str: string): string {
  * @param {boolean} [options.lower] convert the string to lowercase (default=true).
  * @param {boolean} [options.trim] trim leading/trailing whitespace (default=true).
  * @param {boolean} [options.deduplicate] deduplicate successives `replace` char (default=true)
- * @category text
  */
 export function slugify(str: string, options?: {
   replace?: string

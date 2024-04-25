@@ -1,4 +1,3 @@
-/** @category color */
 export function hexToRgb(hex: string): [number, number, number] {
   if (hex.startsWith('#'))
     hex.substring(1)
@@ -16,7 +15,6 @@ export function hexToRgb(hex: string): [number, number, number] {
 export function rgbToHex(rgb: [number, number, number]): string
 export function rgbToHex(r: number, g: number, b: number): string
 
-/** @category color */
 export function rgbToHex(rgb: [number, number, number] | number, g?: number, b?: number): string {
   if (Array.isArray(rgb))
     return `#${((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1)}`

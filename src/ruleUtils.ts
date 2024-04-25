@@ -1,26 +1,18 @@
-/** @category rule */
 export type RuleFunction<T> = (arg: T) => boolean | string
 
 type ValidRuleKeys<T, U> = {
   [K in keyof T]: T[K] extends RuleFunction<U> ? (ReturnType<T[K]> extends boolean | string ? K : never) : never;
 }[keyof T]
 
-/**
- * the name of a valid rule based on the return type of getRules.
- * @category rule
- */
+/** the name of a valid rule based on the return type of getRules */
 export type RulesName<T> = ValidRuleKeys<ReturnType<typeof getRules>, T>
 
-/**
- * either allow a rule name or a rule function
- * @category rule
- */
+/** either allow a rule name or a rule function */
 export type RuleType<T> = (RulesName<T> | RuleFunction<T>)[]
 
 /**
- * Retrieves a set of validation rules.
- * @returns An object containing various validation rule functions.
- * @category rule
+ * Retrieves a set of validation rules
+ * @returns An object containing various validation rule functions
  */
 export function getRules() {
   const compareNumber = (comparator: 'lt' | 'gt' | 'gte' | 'lte' | 'eq' | 'neq', nb: number): RuleFunction<number | undefined | null> => (value: number | undefined | null) => {
