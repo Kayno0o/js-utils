@@ -1,4 +1,4 @@
-name: Generate Documentation and Update gh-pages
+name: generate-doc
 
 on:
   push:
