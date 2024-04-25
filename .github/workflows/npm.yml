@@ -13,8 +13,8 @@ on:
           - major
 
 jobs:
-  doc:
-    name: doc
+  npm:
+    name: npm
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -24,8 +24,8 @@ jobs:
 
       - name: Set git config
         run: |
-          git config --local user.email "kayno0o+js-utils@@github.com"
-          git config --local user.name "Documentation Generator"
+          git config --local user.email "kayno0o+js-utils@github.com"
+          git config --local user.name "Npm Publisher"
   
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -34,7 +34,7 @@ jobs:
         run: bun install
 
       - name: Run eslint
-        run: bun run lint
+        run: bun run lint:fix
 
       - name: Build package files
         run: bun run build
