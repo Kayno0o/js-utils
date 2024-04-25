@@ -29,11 +29,14 @@ jobs:
           git config --local user.email "kevyn.fyleyssant+js-utils@gmail.com"
           git config --local user.name "Github Workflow"
 
-      - name: Checkout gh-pages and fast-forward
-        run: |
-          git fetch origin main
-          git reset --hard origin/main
-          git push origin gh-pages
+      - name: Fetch origin/main
+        run: git fetch origin main
+
+      - name: Reset gh-pages from origin/main
+        run: git reset --hard origin/main
+
+      - name: Push gh-pages changes
+        run: git push origin gh-pages --force
 
       - name: Generate documentation
         run: bun run doc
