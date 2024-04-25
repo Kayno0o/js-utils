@@ -28,11 +28,12 @@ jobs:
         run: |
           git config --local user.email "kevyn.fyleyssant+js-utils@gmail.com"
           git config --local user.name "Github Workflow"
+          git config --local advice.diverging false
 
       - name: Checkout gh-pages and fast-forward
         run: |
           git fetch origin main
-          git rebase origin/main
+          git merge --ff-only --allow-unrelated-histories origin/main
           git push origin gh-pages
 
       - name: Generate documentation
