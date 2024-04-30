@@ -51,3 +51,8 @@ export function slugify(str: string, options?: {
 
   return result
 }
+
+/** Get the initials of the given words, max 3 characters */
+export function getInitials(...words: string[]): string {
+  return words.join(' ').split(' ').map(name => name[0]).join('').slice(0, 3).toLocaleUpperCase()
+}
