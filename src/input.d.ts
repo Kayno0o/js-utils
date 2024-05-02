@@ -161,6 +161,30 @@ export type VideoMimeType =
   | 'video/x-msvideo'
 
 export type MimeType = DocumentMimeType | TextDataMimeType | ArchiveMimeType | AudioMimeType | FontMimeType | ImageMimeType | TextMimeType | VideoMimeType
-type Extension = `.${string}`
+export type Extension = `.${string}`
 
 export type InputAccept = MimeType | Extension
+
+export type InputType =
+  | 'button'
+  | 'checkbox'
+  | 'color'
+  | 'date'
+  | 'datetime-local'
+  | 'email'
+  | 'file'
+  | 'hidden'
+  | 'image'
+  | 'month'
+  | 'number'
+  | 'password'
+  | 'radio'
+  | 'range'
+  | 'reset'
+  | 'search'
+  | 'submit'
+  | 'tel'
+  | 'text'
+  | 'time'
+  | 'url'
+  | 'week'
