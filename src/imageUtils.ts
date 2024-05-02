@@ -1,3 +1,25 @@
+import { buildQuery } from './urlUtils'
+
+/** Build an url from placehold.co */
+export function getPlaceholderUrl(props: {
+  width?: number
+  height?: number
+  format?: 'png' | 'svg' | 'jpg' | 'webp' | 'jpeg' | 'mp4'
+  color?: string
+  backgroundColor?: string
+  text?: string
+  font?: 'lato' | 'lora' | 'montserrat' | 'open sans' | 'oswald' | 'playfair display' | 'pt sans' | 'raleway' | 'roboto' | 'source sans pro'
+}): string {
+  const queryString = buildQuery({
+    font: props.font ? encodeURI(props.font) : undefined,
+    text: props.text ? encodeURI(props.text.replaceAll(' ', '+').replaceAll('\n', '\\n')) : undefined,
+  })
+
+  const path = [props.backgroundColor, props.color, props.format].filter(v => !!v).join('/')
+
+  return `https://placehold.co/${props.width ?? 100}x${props.height ?? 100}${path ? `/${path}` : ''}${queryString}`
+}
+
 export async function convertImage(imageUrl: string, options?: {
   maxWidth?: number
   maxHeight?: number
