@@ -20,6 +20,10 @@ export function normalizeAccents(str: string): string {
   return str.normalize('NFD').replace(/[\u0300-\u036F]/g, '')
 }
 
+export function escapeRegExp(str: string) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
 /**
  * converts a string into a slug
  * @param {string} str
@@ -36,18 +40,19 @@ export function slugify(str: string, options?: {
   deduplicate?: boolean
 }): string {
   const replace = options?.replace ?? '-'
+  const regexReplace = escapeRegExp(replace)
 
   let result = normalizeAccents(str)
     .replace(/[^A-Za-z0-9-]/g, replace)
 
   if (options?.deduplicate ?? true)
-    result = result.replace(new RegExp(`/${replace}+/g`), replace)
+    result = result.replace(new RegExp(`${regexReplace}+`, 'g'), replace)
 
   if (options?.lower ?? true)
     result = result.toLowerCase()
 
   if (options?.trim ?? true)
-    result = result.trim()
+    result = result.replace(new RegExp(`^${regexReplace}*|${regexReplace}*$`, 'g'), '')
 
   return result
 }
