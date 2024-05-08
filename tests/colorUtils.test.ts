@@ -43,4 +43,12 @@ describe('rgbToHex function', () => {
   it('rgb as args', () => {
     expect(rgbToHex(15, 240, 15)).toBe('#0FF00F')
   })
+
+  it('handle 0 as array', () => {
+    expect(rgbToHex([0, 0, 0])).toBe('#000000')
+  })
+
+  it('handle 0 as args', () => {
+    expect(rgbToHex(0, 0, 0)).toBe('#000000')
+  })
 })
