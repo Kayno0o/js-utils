@@ -1,4 +1,4 @@
-export * from './src/input'
+export * from './src/input.d'
 
 export * from './src/arrayUtils'
 export * from './src/colorUtils'
