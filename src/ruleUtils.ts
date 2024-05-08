@@ -5,17 +5,14 @@ type ValidRuleKeys<T, U> = {
 }[keyof T]
 
 /** the name of a valid rule based on the return type of getRules */
-export type RulesName<T> = ValidRuleKeys<ReturnType<typeof getRules>, T>
+export type RulesName<T> = ValidRuleKeys<typeof rules, T>
 
 /** either allow a rule name or a rule function */
 export type RuleType<T> = (RulesName<T> | RuleFunction<T>)[]
 
-/**
- * Retrieves a set of validation rules
- * @returns An object containing various validation rule functions
- */
-export function getRules() {
-  const compareNumber = (comparator: 'lt' | 'gt' | 'gte' | 'lte' | 'eq' | 'neq', nb: number): RuleFunction<number | undefined | null> => (value: number | undefined | null) => {
+/** Retrieves a set of validation rules */
+function compareNumber(comparator: 'lt' | 'gt' | 'gte' | 'lte' | 'eq' | 'neq', nb: number): RuleFunction<number | undefined | null> {
+  return (value: number | undefined | null) => {
     value = value ?? 0
     switch (comparator) {
       case 'eq':
@@ -34,50 +31,81 @@ export function getRules() {
         return 'Condition invalide'
     }
   }
-
-  return {
-    compareNumber,
-    email: (value?: string | null): boolean | string => {
-      if (!value)
-        return true
-
-      return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        .test(value) || 'Email invalide'
-    },
-    isNumber: (value?: string | number | null): boolean | string => {
-      if (value === null || value === undefined)
-        return true
-
-      return !Number.isNaN(Number(value)) || 'Nombre invalide'
-    },
-    max: (nb: number, eq: boolean = true): RuleFunction<number | undefined | null> => compareNumber(eq ? 'lte' : 'lt', nb),
-    maxLength: (length: number): RuleFunction<undefined | string | any[] | null> =>
-      (value?: string | any[] | null) => ((value?.length || 0) <= length) || `Valeur trop longue : ${length} caractères maximum.`,
-    min: (nb: number, eq: boolean = true): RuleFunction<number | undefined | null> => compareNumber(eq ? 'gte' : 'gt', nb),
-    minLength: (length: number): RuleFunction<undefined | string | any[] | null> =>
-      (value?: string | any[] | null) => ((value?.length || 0) >= length) || `Valeur trop courte : ${length} caractères requis.`,
-    nonZero: (value?: number | null): boolean | string => {
-      if (typeof value === 'number')
-        return (value !== 0) || 'Champ requis'
-
-      return !!value || 'Champ requis'
-    },
-    phone: (value?: string | number | null): boolean | string => {
-      if (!value)
-        return true
-      return /^(\+?33 ?|0)[1-9]([-. ]?\d{2}){4}$/.test(value.toString()) || 'Numéro invalide'
-    },
-    required: (value?: any): boolean | string => {
-      if (value === undefined || value === null)
-        return 'Champ requis'
-
-      if (typeof value === 'number')
-        return true
-
-      if (Array.isArray(value))
-        return value.length > 0 || 'Champ requis'
-
-      return !!value || 'Champ requis'
-    },
-  }
 }
+
+const rules = {
+  compareNumber,
+
+  email: (value?: string | null): boolean | string => {
+    if (!value)
+      return true
+
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      .test(value) || 'Email invalide'
+  },
+
+  isNumber: (value?: string | number | null): boolean | string => {
+    if (value === null || value === undefined)
+      return true
+
+    return !Number.isNaN(Number(value)) || 'Nombre invalide'
+  },
+
+  isSlug: (value?: string | null): boolean | string => {
+    if (!value)
+      return true
+
+    return /^[a-z0-9_]+$/.test(value) || 'La valeur ne peut contenir que des chiffres, lettres et \'_\''
+  },
+
+  lowercase: (value?: string | null): boolean | string => {
+    if (!value)
+      return true
+
+    return value.toLowerCase() === value || 'La valeur doit être en minuscules'
+  },
+
+  max: (nb: number, eq = true) => compareNumber(eq ? 'lte' : 'lt', nb),
+  maxLength: (length: number) =>
+    (value?: string | any[] | null) => {
+      if (!value)
+        return true
+      return ((value?.length || 0) <= length) || `Valeur trop longue : ${length} caractères maximum.`
+    },
+
+  min: (nb: number, eq = true) => compareNumber(eq ? 'gte' : 'gt', nb),
+  minLength: (length: number) =>
+    (value?: string | any[] | null) => {
+      if (!value)
+        return true
+      return ((value?.length || 0) >= length) || `Valeur trop courte : ${length} caractères requis.`
+    },
+
+  nonZero: (value?: number | null): boolean | string => {
+    if (typeof value === 'number')
+      return (value !== 0) || 'Champ requis'
+
+    return !!value || 'Champ requis'
+  },
+
+  phone: (value?: string | number | null): boolean | string => {
+    if (!value)
+      return true
+    return /^(\+?33 ?|0)[1-9]([-. ]?\d{2}){4}$/.test(value.toString()) || 'Numéro invalide'
+  },
+
+  required: (value?: any): boolean | string => {
+    if (value === undefined || value === null)
+      return 'Champ requis'
+
+    if (typeof value === 'number')
+      return true
+
+    if (Array.isArray(value))
+      return value.length > 0 || 'Champ requis'
+
+    return !!value || 'Champ requis'
+  },
+}
+
+export default rules
