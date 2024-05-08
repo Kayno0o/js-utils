@@ -33,7 +33,7 @@ function compareNumber(comparator: 'lt' | 'gt' | 'gte' | 'lte' | 'eq' | 'neq', n
   }
 }
 
-const rules = {
+export const rules = {
   compareNumber,
 
   email: (value?: string | null): boolean | string => {
@@ -107,5 +107,3 @@ const rules = {
     return !!value || 'Champ requis'
   },
 }
-
-export default rules
