@@ -1,3 +1,5 @@
+export * from './src/input'
+
 export * from './src/arrayUtils'
 export * from './src/colorUtils'
 export * from './src/dateUtils'
