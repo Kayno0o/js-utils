@@ -21,7 +21,8 @@
   "scripts": {
     "build": "tsup",
     "lint:fix": "eslint . --fix",
-    "doc": "typedoc ./src/*"
+    "doc": "typedoc ./src/*",
+    "test": "bun test"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
