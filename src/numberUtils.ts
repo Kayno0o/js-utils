@@ -41,3 +41,7 @@ export function humanFileSize(bytes: number, si = false, dp = 1) {
 
   return `${bytes.toFixed(dp)} ${units[u]}`
 }
+
+export function precisionRound(nb: number, precision = 2) {
+  return Math.round(nb * (10 ** precision)) / (10 ** precision)
+}
