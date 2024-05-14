@@ -81,6 +81,13 @@ export const rules = {
       return ((value?.length || 0) >= length) || `Valeur trop courte : ${length} caractères requis.`
     },
 
+  nonEmptyString: (value?: string | null): boolean | string => {
+    if (!value)
+      return 'Champ requis'
+
+    return value.trim().length > 0 || 'Champ requis'
+  },
+
   nonZero: (value?: number | null): boolean | string => {
     if (typeof value === 'number')
       return (value !== 0) || 'Champ requis'
