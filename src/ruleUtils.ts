@@ -40,7 +40,7 @@ export const rules = {
     if (!value)
       return true
 
-    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return /^(?:[^<>()[\]\\.,;:\s@"]+(?:\.[^<>()[\]\\.,;:\s@"]+)*|".+")@(?:\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\]|(?:[a-z\-0-9]+\.)+[a-z]{2,})$/i
       .test(value) || 'Email invalide'
   },
 
@@ -98,7 +98,7 @@ export const rules = {
   phone: (value?: string | number | null): boolean | string => {
     if (!value)
       return true
-    return /^(\+?33 ?|0)[1-9]([-. ]?\d{2}){4}$/.test(value.toString()) || 'Numéro invalide'
+    return /^(?:\+?33 ?|0)[1-9](?:[-. ]?\d{2}){4}$/.test(value.toString()) || 'Numéro invalide'
   },
 
   required: (value?: any): boolean | string => {

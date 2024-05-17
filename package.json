@@ -22,16 +22,20 @@
     "build": "tsup",
     "lint:fix": "eslint . --fix",
     "doc": "typedoc ./src/*",
-    "test": "bun test"
+    "test": "bun test",
+    "benchmark": "bun benchmark.ts"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "dayjs": "^1.11.10"
+    "benchmark": "^2.1.4",
+    "dayjs": "^1.11.10",
+    "microtime": "^3.1.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.14.0",
+    "@types/benchmark": "^2.1.5",
     "@types/bun": "latest",
     "eslint": "^9.0.0",
     "eslint-plugin-format": "^0.1.0",
