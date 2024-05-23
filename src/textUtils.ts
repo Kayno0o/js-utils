@@ -59,7 +59,11 @@ export function getInitials(...words: string[]): string {
   return words.join(' ').split(' ').map(name => name[0]).join('').slice(0, 3).toLocaleUpperCase()
 }
 
-export const LOREM_WORDS = ['Cat', 'Kitten', 'Whiskers', 'Purr', 'Meow', 'Feline', 'Paw', 'Tail', 'Fur', 'Scratch', 'Hiss', 'Claws', 'Kitty', 'Tabby', 'Siamese', 'Persian', 'Bengal', 'Calico', 'Tomcat', 'Mouser']
+export function firstUpper(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+export const LOREM_WORDS = ['cat', 'kitten', 'whiskers', 'purr', 'meow', 'feline', 'paw', 'tail', 'fur', 'scratch', 'hiss', 'claws', 'kitty', 'tabby', 'siamese', 'persian', 'bengal', 'calico', 'tomcat', 'mouser']
 
 export interface LoremOptionType {
   length?: number
@@ -76,10 +80,10 @@ export function randomText(options?: LoremOptionType, words = LOREM_WORDS): stri
     const count = randomInt(5, 15, isCrypto)
     let sentence = rWord()
     for (let i = 1; i < count; i++)
-      sentence += (i < count - 1 && Math.random() < 0.2) ? `${rWord()}, ` : ` ${rWord()}`
+      sentence += (i < count - 1 && Math.random() < 0.1) ? ` ${rWord()},` : ` ${rWord()}`
 
     sentence += '.'
-    return sentence
+    return firstUpper(sentence)
   }
   const rParagraph = () => {
     const count = randomInt(3, 7, isCrypto)
@@ -96,4 +100,14 @@ export function randomText(options?: LoremOptionType, words = LOREM_WORDS): stri
       case 'paragraph': default: return rParagraph()
     }
   }).join(type === 'word' ? ' ' : '\n')
+}
+
+export function searchOne(query: string, ...values: string[]): boolean {
+  query = normalizeAccents(query).toLowerCase()
+  return values.some(value => normalizeAccents(value).toLowerCase().includes(query))
+}
+
+export function searchAll(query: string, ...values: string[]): boolean {
+  query = normalizeAccents(query).toLowerCase()
+  return values.every(value => normalizeAccents(value).toLowerCase().includes(query))
 }

@@ -1,5 +1,44 @@
 import { describe, expect, test as it } from 'bun:test'
-import { escapeRegExp, getInitials, normalizeAccents, randomString, slugify } from '../src/textUtils'
+import { escapeRegExp, getInitials, normalizeAccents, randomString, randomText, searchAll, searchOne, slugify } from '../src/textUtils'
+
+describe('randomString function', () => {
+  const defaultCharset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+  it('should generate a random string of specified length', () => {
+    const length = 10
+    expect((randomString(length)).length).toEqual(length)
+  })
+
+  it('should generate a random string from default charset', () => {
+    const length = 10
+    expect(randomString(length)).toMatch(new RegExp(`^[${defaultCharset}]{${length}}$`))
+  })
+
+  it('should generate a random string from custom charset', () => {
+    const length = 10
+    const charset = 'abc123'
+    expect(randomString(length, charset)).toMatch(new RegExp(`^[${charset}]{${length}}$`))
+  })
+
+  it('should handle empty charset', () => {
+    const length = 10
+    const charset = ''
+    expect(randomString(length, charset)).toMatch(new RegExp(`^[${defaultCharset}]{${length}}$`))
+  })
+
+  it('should handle length 0', () => {
+    const length = 0
+    const charset = 'abc123'
+    expect(randomString(length, charset)).toEqual('')
+  })
+
+  it('should handle large length with default charset', () => {
+    const length = 1000
+    const result = randomString(length)
+    expect(result.length).toEqual(length)
+    expect(result).toMatch(new RegExp(`^[${defaultCharset}]{${length}}$`))
+  })
+})
 
 describe('normalizeAccents function', () => {
   it('handle lowercase accent', () => {
@@ -19,35 +58,40 @@ describe('normalizeAccents function', () => {
   })
 })
 
-describe('getInitials function', () => {
-  it('initials of the given words', () => {
-    const result = getInitials('John', 'Doe')
-    expect(result).toEqual('JD')
+describe('escapeRegExp function', () => {
+  it('special characters in a regular expression', () => {
+    const input = 'Hello. World? [test]'
+    const expectedOutput = 'Hello\\. World\\? \\[test\\]'
+    const result = escapeRegExp(input)
+    expect(result).toEqual(expectedOutput)
   })
 
-  it('multiple words with spaces', () => {
-    const result = getInitials('John Doe Smith')
-    expect(result).toEqual('JDS')
+  it('empty string', () => {
+    const input = ''
+    const expectedOutput = ''
+    const result = escapeRegExp(input)
+    expect(result).toEqual(expectedOutput)
   })
 
-  it('one-word input', () => {
-    const result = getInitials('Alice')
-    expect(result).toEqual('A')
+  it('all special characters', () => {
+    const input = '.*+?^${}()|[]\\'
+    const expectedOutput = '\\.\\*\\+\\?\\^\\$\\{\\}\\(\\)\\|\\[\\]\\\\'
+    const result = escapeRegExp(input)
+    expect(result).toEqual(expectedOutput)
   })
 
-  it('empty input', () => {
-    const result = getInitials()
-    expect(result).toEqual('')
+  it('strings with no special characters', () => {
+    const input = 'Hello World'
+    const expectedOutput = 'Hello World'
+    const result = escapeRegExp(input)
+    expect(result).toEqual(expectedOutput)
   })
 
-  it('longer words and trim to 3 characters', () => {
-    const result = getInitials('International Business Machines Etc')
-    expect(result).toEqual('IBM')
-  })
-
-  it('non-alphabetic characters', () => {
-    const result = getInitials('123', 'ABC', '$%^')
-    expect(result).toEqual('1A$')
+  it('special characters in a regex pattern', () => {
+    const input = '^Hello$'
+    const expectedOutput = '\\^Hello\\$'
+    const result = escapeRegExp(input)
+    expect(result).toEqual(expectedOutput)
   })
 })
 
@@ -108,78 +152,93 @@ describe('slugify function', () => {
   })
 })
 
-describe('escapeRegExp function', () => {
-  it('special characters in a regular expression', () => {
-    const input = 'Hello. World? [test]'
-    const expectedOutput = 'Hello\\. World\\? \\[test\\]'
-    const result = escapeRegExp(input)
-    expect(result).toEqual(expectedOutput)
+describe('getInitials function', () => {
+  it('initials of the given words', () => {
+    const result = getInitials('John', 'Doe')
+    expect(result).toEqual('JD')
   })
 
-  it('empty string', () => {
-    const input = ''
-    const expectedOutput = ''
-    const result = escapeRegExp(input)
-    expect(result).toEqual(expectedOutput)
+  it('multiple words with spaces', () => {
+    const result = getInitials('John Doe Smith')
+    expect(result).toEqual('JDS')
   })
 
-  it('all special characters', () => {
-    const input = '.*+?^${}()|[]\\'
-    const expectedOutput = '\\.\\*\\+\\?\\^\\$\\{\\}\\(\\)\\|\\[\\]\\\\'
-    const result = escapeRegExp(input)
-    expect(result).toEqual(expectedOutput)
+  it('one-word input', () => {
+    const result = getInitials('Alice')
+    expect(result).toEqual('A')
   })
 
-  it('strings with no special characters', () => {
-    const input = 'Hello World'
-    const expectedOutput = 'Hello World'
-    const result = escapeRegExp(input)
-    expect(result).toEqual(expectedOutput)
+  it('empty input', () => {
+    const result = getInitials()
+    expect(result).toEqual('')
   })
 
-  it('special characters in a regex pattern', () => {
-    const input = '^Hello$'
-    const expectedOutput = '\\^Hello\\$'
-    const result = escapeRegExp(input)
-    expect(result).toEqual(expectedOutput)
+  it('longer words and trim to 3 characters', () => {
+    const result = getInitials('International Business Machines Etc')
+    expect(result).toEqual('IBM')
+  })
+
+  it('non-alphabetic characters', () => {
+    const result = getInitials('123', 'ABC', '$%^')
+    expect(result).toEqual('1A$')
   })
 })
 
-describe('randomString function', () => {
-  const defaultCharset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-
-  it('should generate a random string of specified length', () => {
-    const length = 10
-    expect((randomString(length)).length).toEqual(length)
+describe('randomText function', () => {
+  it('should generate a random paragraph of specified length', () => {
+    const length = 5
+    const result = randomText({ length, type: 'paragraph' })
+    expect(result.split('\n').length).toEqual(length)
   })
 
-  it('should generate a random string from default charset', () => {
-    const length = 10
-    expect(randomString(length)).toMatch(new RegExp(`^[${defaultCharset}]{${length}}$`))
+  it('should generate a random sentence of specified length', () => {
+    const length = 5
+    const result = randomText({ length, type: 'sentence' })
+    expect(result.split('.').length - 1).toEqual(length)
   })
 
-  it('should generate a random string from custom charset', () => {
-    const length = 10
-    const charset = 'abc123'
-    expect(randomString(length, charset)).toMatch(new RegExp(`^[${charset}]{${length}}$`))
+  it('should generate a random word of specified length', () => {
+    const length = 5
+    const result = randomText({ length, type: 'word' })
+    expect(result.split(' ').length).toEqual(length)
   })
 
-  it('should handle empty charset', () => {
-    const length = 10
-    const charset = ''
-    expect(randomString(length, charset)).toMatch(new RegExp(`^[${defaultCharset}]{${length}}$`))
+  it('should handle empty options', () => {
+    const result = randomText()
+    expect(result.split('\n').length).toEqual(5)
+  })
+})
+
+describe('searchOne function', () => {
+  it('should return true if one of the values contains the query', () => {
+    const result = searchOne('hello', 'hello world', 'goodbye world')
+    expect(result).toEqual(true)
   })
 
-  it('should handle length 0', () => {
-    const length = 0
-    const charset = 'abc123'
-    expect(randomString(length, charset)).toEqual('')
+  it('should return false if none of the values contains the query', () => {
+    const result = searchOne('hello', 'goodbye world', 'see you later')
+    expect(result).toEqual(false)
   })
 
-  it('should handle large length with default charset', () => {
-    const length = 1000
-    const result = randomString(length)
-    expect(result.length).toEqual(length)
-    expect(result).toMatch(new RegExp(`^[${defaultCharset}]{${length}}$`))
+  it('should handle accents in the query and values', () => {
+    const result = searchOne('café', 'Café au lait', 'Tea')
+    expect(result).toEqual(true)
+  })
+})
+
+describe('searchAll function', () => {
+  it('should return true if all of the values contains the query', () => {
+    const result = searchAll('world', 'hello world', 'goodbye world')
+    expect(result).toEqual(true)
+  })
+
+  it('should return false if one of the values does not contain the query', () => {
+    const result = searchAll('world', 'hello world', 'see you later')
+    expect(result).toEqual(false)
+  })
+
+  it('should handle accents in the query and values', () => {
+    const result = searchAll('café', 'Café au lait', 'Café noir')
+    expect(result).toEqual(true)
   })
 })
