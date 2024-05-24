@@ -1,4 +1,5 @@
 export * from './src/input.d'
+export * from './src/types.d'
 
 export * from './src/arrayUtils'
 export * from './src/colorUtils'
@@ -10,3 +11,4 @@ export * from './src/ruleUtils'
 export * from './src/textUtils'
 export * from './src/urlUtils'
 export * from './src/clipboardUtils'
+export * from './src/endpointUtils'

@@ -1,5 +1,5 @@
 import Benchmark from 'benchmark'
-import { randomText } from './index'
+import { randomText } from './'
 
 const suite = new Benchmark.Suite()
 
