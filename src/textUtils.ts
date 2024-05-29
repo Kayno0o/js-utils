@@ -40,7 +40,7 @@ export function slugify(str: string, options?: {
   const regexReplace = escapeRegExp(replace)
 
   let result = normalizeAccents(str)
-    .replace(/[^A-Za-z0-9-]/g, replace)
+    .replace(/[^A-Z0-9-]/gi, replace)
 
   if (options?.deduplicate ?? true)
     result = result.replace(new RegExp(`${regexReplace}+`, 'g'), replace)

@@ -2,8 +2,6 @@ import { describe, expect, test as it } from 'bun:test'
 import { escapeRegExp, getInitials, normalizeAccents, randomString, randomText, searchAll, searchOne, slugify } from '../src/textUtils'
 
 describe('randomString function', () => {
-  const defaultCharset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-
   it('should generate a random string of specified length', () => {
     const length = 10
     expect((randomString(length)).length).toEqual(length)
@@ -11,7 +9,7 @@ describe('randomString function', () => {
 
   it('should generate a random string from default charset', () => {
     const length = 10
-    expect(randomString(length)).toMatch(new RegExp(`^[${defaultCharset}]{${length}}$`))
+    expect(randomString(length)).toMatch(new RegExp(`^[a-z0-9]{${length}}$`, 'i'))
   })
 
   it('should generate a random string from custom charset', () => {
@@ -23,7 +21,7 @@ describe('randomString function', () => {
   it('should handle empty charset', () => {
     const length = 10
     const charset = ''
-    expect(randomString(length, charset)).toMatch(new RegExp(`^[${defaultCharset}]{${length}}$`))
+    expect(randomString(length, charset)).toMatch(new RegExp(`^[a-z0-9]{${length}}$`, 'i'))
   })
 
   it('should handle length 0', () => {
@@ -36,7 +34,7 @@ describe('randomString function', () => {
     const length = 1000
     const result = randomString(length)
     expect(result.length).toEqual(length)
-    expect(result).toMatch(new RegExp(`^[${defaultCharset}]{${length}}$`))
+    expect(result).toMatch(new RegExp(`^[a-z0-9]{${length}}$`, 'i'))
   })
 })
 
