@@ -63,7 +63,7 @@ export function firstUpper(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export const LOREM_WORDS = ['cat', 'kitten', 'whiskers', 'purr', 'meow', 'feline', 'paw', 'tail', 'fur', 'scratch', 'hiss', 'claws', 'kitty', 'tabby', 'siamese', 'persian', 'bengal', 'calico', 'tomcat', 'mouser']
+export const LOREM_WORDS = ['lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 'proin', 'ultricies', 'sed', 'dui', 'scelerisque', 'donec', 'pellentesque', 'diam', 'vel', 'ligula', 'efficitur']
 
 export interface LoremOptionType {
   length?: number
