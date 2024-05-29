@@ -111,3 +111,24 @@ export function searchAll(query: string, ...values: string[]): boolean {
   query = normalizeAccents(query).toLowerCase()
   return values.every(value => normalizeAccents(value).toLowerCase().includes(query))
 }
+
+export function getPlaceholderUrl(props: {
+  width?: number
+  height?: number
+  format?: 'png' | 'svg' | 'jpg' | 'webp' | 'jpeg' | 'mp4'
+  color?: string
+  backgroundColor?: string
+  text?: string
+  font?: 'lato' | 'lora' | 'montserrat' | 'open sans' | 'oswald' | 'playfair display' | 'pt sans' | 'raleway' | 'roboto' | 'source sans pro'
+}): string {
+  const query: any = {}
+  if (props.text)
+    query.text = encodeURI(props.text.replaceAll(' ', '+').replaceAll('\n', '\\n'))
+  if (props.font)
+    query.font = encodeURI(props.font)
+  const queryString = query ? `?${Object.entries(query).map(e => `${e[0]}=${e[1]}`).join('&')}` : ''
+
+  const path = [props.backgroundColor, props.color, props.format].filter(v => !!v).join('/')
+
+  return `https://placehold.co/${props.width ?? 100}x${props.height ?? 100}${path ? `/${path}` : ''}${queryString}`
+}
