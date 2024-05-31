@@ -45,3 +45,7 @@ export function humanFileSize(bytes: number, si = false, dp = 1) {
 export function precisionRound(nb: number, precision = 2) {
   return Math.round(nb * (10 ** precision)) / (10 ** precision)
 }
+
+export function round(nb: number, precision = 2) {
+  return Math.round(nb * (10 ** precision)) / (10 ** precision)
+}
