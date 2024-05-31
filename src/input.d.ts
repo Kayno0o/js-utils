@@ -188,3 +188,5 @@ export type InputType =
   | 'time'
   | 'url'
   | 'week'
+
+export type ButtonType = 'submit' | 'reset' | 'button'
