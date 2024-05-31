@@ -111,3 +111,7 @@ export function searchAll(query: string, ...values: string[]): boolean {
   query = normalizeAccents(query).toLowerCase()
   return values.every(value => normalizeAccents(value).toLowerCase().includes(query))
 }
+
+export function removeComments(content: string): string {
+  return content.replace(/\/\/.+/g, '').replace(/\/\*[\s\S]*?\*\//g, '')
+}
