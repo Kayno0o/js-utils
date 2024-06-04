@@ -2,13 +2,13 @@ import { buildQuery } from './urlUtils'
 
 /** Build an url from placehold.co */
 export function getPlaceholderUrl(props: {
-  width?: number
-  height?: number
-  format?: 'png' | 'svg' | 'jpg' | 'webp' | 'jpeg' | 'mp4'
-  color?: string
   backgroundColor?: string
-  text?: string
+  color?: string
   font?: 'lato' | 'lora' | 'montserrat' | 'open sans' | 'oswald' | 'playfair display' | 'pt sans' | 'raleway' | 'roboto' | 'source sans pro'
+  format?: 'png' | 'svg' | 'jpg' | 'webp' | 'jpeg' | 'mp4'
+  height?: number
+  text?: string
+  width?: number
 }): string {
   const queryString = buildQuery({
     font: props.font ? encodeURI(props.font) : undefined,
@@ -21,10 +21,10 @@ export function getPlaceholderUrl(props: {
 }
 
 export async function convertImage(imageUrl: string, options?: {
-  maxWidth?: number
-  maxHeight?: number
-  quality?: number
   format?: 'image/webp' | 'image/png' | 'image/jpeg'
+  maxHeight?: number
+  maxWidth?: number
+  quality?: number
 }): Promise<string> {
   return new Promise((resolve, reject) => {
     const canvas = document.createElement('canvas')

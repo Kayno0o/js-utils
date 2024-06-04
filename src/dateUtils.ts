@@ -13,9 +13,9 @@ type NullableSingleDateProp = SingleDateProp | null | undefined
 type DateProp = NullableSingleDateProp | NullableSingleDateProp[]
 
 interface DateUtilsConfig {
-  utc?: boolean
   separator?: string
   unique?: boolean
+  utc?: boolean
 }
 
 const formats: Record<DateFormatType, string> = {
@@ -59,7 +59,7 @@ export function formatDate(date: DateProp, format: DateFormatType | string = 'de
  * @param {boolean} [utc] formats in utc timezone (default: false).
  * @returns {boolean} true if is between the start and end (inclusive), else false.
  */
-export function isDateBetween(date: SingleDateProp, start: NullableSingleDateProp, end: NullableSingleDateProp, utc: boolean = false): boolean {
+export function isDateBetween(date: SingleDateProp, start: NullableSingleDateProp, end: NullableSingleDateProp, utc = false): boolean {
   const d = utc ? dayjs.utc(date) : dayjs(date)
   return (start ? d.isAfter(start) : true) && (end ? d.isBefore(end) : true)
 }

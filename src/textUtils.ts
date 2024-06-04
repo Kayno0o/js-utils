@@ -31,10 +31,10 @@ export function escapeRegExp(str: string) {
  * @param {boolean} [options.deduplicate] deduplicate successives `replace` char (default=true)
  */
 export function slugify(str: string, options?: {
-  replace?: string
-  lower?: boolean
-  trim?: boolean
   deduplicate?: boolean
+  lower?: boolean
+  replace?: string
+  trim?: boolean
 }): string {
   const replace = options?.replace ?? '-'
   const regexReplace = escapeRegExp(replace)
@@ -66,13 +66,13 @@ export function firstUpper(str: string): string {
 export const LOREM_WORDS = ['lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 'proin', 'ultricies', 'sed', 'dui', 'scelerisque', 'donec', 'pellentesque', 'diam', 'vel', 'ligula', 'efficitur']
 
 export interface LoremOptionType {
+  isCrypto?: boolean
   length?: number
   type?: 'word' | 'sentence' | 'paragraph'
-  isCrypto?: boolean
 }
 
 export function randomText(options?: LoremOptionType, words = LOREM_WORDS): string {
-  let { length = 5, type = 'paragraph', isCrypto = false } = options || {}
+  let { isCrypto = false, length = 5, type = 'paragraph' } = options || {}
   length = Math.max(0, length)
 
   const rWord = () => getRandomElement(words, isCrypto)
