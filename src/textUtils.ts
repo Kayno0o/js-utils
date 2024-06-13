@@ -115,3 +115,16 @@ export function searchAll(query: string, ...values: string[]): boolean {
 export function removeComments(content: string): string {
   return content.replace(/\/\/.+/g, '').replace(/\/\*[\s\S]*?\*\//g, '')
 }
+
+export function escapeXml(unsafe: string): string {
+  return unsafe.replace(/[<>&'"]/g, (char) => {
+    switch (char) {
+      case '<': return '&lt;'
+      case '>': return '&gt;'
+      case '&': return '&amp;'
+      case '\'': return '&apos;'
+      case '"': return '&quot;'
+      default: return char
+    }
+  })
+}
