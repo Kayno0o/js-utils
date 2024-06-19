@@ -113,7 +113,7 @@ export function searchAll(query: string, ...values: string[]): boolean {
 }
 
 export function removeComments(content: string): string {
-  return content.replace(/\/\/.+/g, '').replace(/\/\*[\s\S]*?\*\//g, '')
+  return content.replace(/\/\/.+|\/\*[\s\S]*?\*\//g, '')
 }
 
 export function escapeXml(unsafe: string): string {
