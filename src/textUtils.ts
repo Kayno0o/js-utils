@@ -128,3 +128,22 @@ export function escapeXml(unsafe: string): string {
     }
   })
 }
+
+export function matchLength(str1: string, str2: string): number {
+  let length = 0
+  const minLength = Math.min(str1.length, str2.length)
+
+  for (let i = 0; i < minLength; i++) {
+    if (str1[i] !== str2[i]) {
+      break
+    }
+    length++
+  }
+
+  return length
+}
+
+export function matchingSubstring(str1: string, str2: string): string {
+  const length = matchLength(str1, str2)
+  return str1.substring(0, length)
+}
