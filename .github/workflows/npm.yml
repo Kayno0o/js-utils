@@ -4,16 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch:
-    inputs:
-      version_bump_type:
-        type: choice
-        required: true
-        description: The type of version bump
-        options:
-          - patch
-          - minor
-          - major
 
 jobs:
   npm:
