@@ -1,9 +1,6 @@
 name: publish-npm
 
 on:
-  push:
-    tags:
-      - 'v*'
   workflow_dispatch:
     inputs:
       version_bump_type:
@@ -25,6 +22,11 @@ jobs:
         with:
           ref: main
 
+      - name: Set git config
+        run: |
+          git config --local user.email "kayno0o+js-utils@github.com"
+          git config --local user.name "Npm Publisher"
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
@@ -40,6 +42,9 @@ jobs:
         run: npm version ${{ github.event.inputs.version_bump_type }}
 
       - name: Publish to npm
-        run: npm publish --access public
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Push changes
+        run: git push --follow-tags
