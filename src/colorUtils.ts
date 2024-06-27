@@ -26,3 +26,7 @@ export function rgbToHex(rgb: [number, number, number] | number, g?: number, b?:
     return `#${((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1)}`.toUpperCase()
   return `#${((1 << 24) + (rgb << 16) + (g! << 8) + b!).toString(16).slice(1)}`.toUpperCase()
 }
+
+export function randomHex() {
+  return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`.toUpperCase()
+}
