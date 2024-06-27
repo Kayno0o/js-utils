@@ -2,12 +2,18 @@ import { getRandomElement } from './arrayUtils'
 import { randomInt } from './numberUtils'
 
 export function randomString(length: number, charset?: string, isCrypto = false): string {
-  if (!charset)
-    charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  charset ??= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+  if (isCrypto) {
+    let id = ''
+    const vals = crypto.getRandomValues(new Uint8Array(length))
+    for (let i = 0; i < length; i++) id += charset[vals[i] % charset.length]
+    return id
+  }
 
   let result = ''
   for (let i = 0; i < length; i++)
-    result += charset[randomInt(0, charset.length, isCrypto)]
+    result += charset[randomInt(0, charset.length)]
 
   return result
 }
